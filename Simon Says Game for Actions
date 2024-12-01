@@ -1,0 +1,57 @@
+import random
+import time
+
+# List of possible words for the game
+WORDS = [
+    "Simon is speaking",
+    "Simon is reading",
+    "Simon is listening",
+    "Simon is walking",
+    "Simon is working",
+    "Simon is in love with his girlfriend"
+]
+
+def generate_word_sequence(sequence):
+    """Add a random word to the existing sequence."""
+    sequence.append(random.choice(WORDS))
+    return sequence
+
+def display_sequence(sequence):
+    """Display the sequence of words to the player."""
+    print("\nMemorize this sequence of words:")
+    for word in sequence:
+        print(word)
+        time.sleep(2)  # Wait 2 seconds between words
+    print("\033c", end="")  # Clear the console (works on most terminals)
+
+def get_user_input(length):
+    """Get the player's input for the sequence of words."""
+    print(f"Enter the sequence of {length} phrases, separated by commas (e.g., 'phrase1, phrase2'):")
+    user_input = input().strip().split(", ")
+    return user_input
+
+def play_game():
+    """Run the Simon Says game with words."""
+    print("Welcome to the Simon Says Word Game!")
+    print("Memorize and repeat the sequence of phrases as it grows longer each round.\n")
+    
+    sequence = []
+    score = 0
+
+    while True:
+        sequence = generate_word_sequence(sequence)
+        display_sequence(sequence)
+        
+        user_input = get_user_input(len(sequence))
+        
+        if user_input == sequence:
+            score += 1
+            print(f"Correct! Your current score is: {score}\n")
+        else:
+            print("Incorrect! Game Over.")
+            print(f"The correct sequence was: {', '.join(sequence)}")
+            print(f"Your final score: {score}")
+            break
+
+if __name__ == "__main__":
+    play_game()
