@@ -1,0 +1,71 @@
+import random
+import time
+
+def generate_sequence(sequence):
+    """Add a random step (0-100) to the existing sequence."""
+    sequence.append(random.randint(0, 100))
+    return sequence
+
+def generate_sequence(sequence):
+    sequence.append(random.randint(1000, 13901))
+    return sequence
+
+def display_sequence(sequence):
+    """Display the sequence to the player with a short delay."""
+    print("\nMemorize this sequence:")
+    for step in sequence:
+        print(step)
+        time.sleep(1)  # Wait 1 seconds between steps
+    print("\033c", end="")  # Clear the console (works on most terminals)
+
+def .1generate_sequence(sequence):
+def display_sequence(sequence):
+    print("\nMemorize this sequence:")
+    for step in sequence:
+        print(step)
+        time.sleep(2)
+    print("\033c", end="")
+
+def get_user_input(length):
+    """Get the player's input for the sequence."""
+    print(f"Enter the sequence of {length} numbers (space-separated):")
+    try:
+        user_input = list(map(int, input().strip().split()))
+    except ValueError:
+        user_input = []
+    return user_input
+
+def get_user_input(length):
+    """Get the player's input for the sequence."""
+    print(f"Enter the sequence of {length} numbers (space-separated):")
+    try:
+        user_input = list(map(int, input().strip().split()))
+    except ValueError:
+        user_input = []
+    return user_input
+
+
+def play_game():
+    """Run the Simon Says game."""
+    print("Welcome to the Simon Says Game!")
+    print("Follow the sequence as it grows longer with each round.\n")
+    
+    sequence = []
+    score = 0
+
+    while True:
+        sequence = generate_sequence(sequence)
+        display_sequence(sequence)
+        
+        user_input = get_user_input(len(sequence))
+        
+        if user_input == sequence:
+            score += 1
+            print(f"Correct! Your current score is: {score}\n")
+        else:
+            print("Incorrect! Game Over.")
+            print(f"Final score: {score}")
+            break
+
+if __name__ == "__main__":
+    play_game()
